@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'typeface-roboto';
+import { withStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import WordList from './WordList';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const styles = theme => ({
+  appBar: {
+    position: 'relative',
+  },
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  }
+});
+
+class App extends React.Component {
+  render(){
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <AppBar position="absolute" color="default" className={this.props.classes.appBar}>
+          <Toolbar>
+            <Typography variant="h6" color="inherit" noWrap>
+              Speller - A Fun way to learn spellings!
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <main className={this.props.classes.layout}>
+          <WordList/>
+        </main>
+      </React.Fragment>
+
+      );
+  }
 }
 
-export default App;
+export default withStyles(styles)(App);
