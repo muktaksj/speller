@@ -94,7 +94,7 @@ const styles = theme => ({
               }
                 
             </Grid>):(
-              <WordTest wordListId={this.state.wordListId}></WordTest>
+              <WordTest wordListId={this.state.wordListId} onTestComplete={()=>{this.setState({wordListId:0,words:this.wordListManager.getAllLists()});}}></WordTest>
             )
           }
         </div>

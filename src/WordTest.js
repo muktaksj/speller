@@ -32,12 +32,13 @@ const styles = theme => ({
 
     getWord(){
         if(this.wordList.score===this.wordList.words.length){
-            console.log("Score Complete")
-            this.wordList.score=0;
-            this.wordList.level++;
-            if(this.wordList.level>4){
-                return;
+            if(this.wordList.level===4){
+                this.wordListManager.setLevelScore(this.props.wordListId,this.wordList.level,this.wordList.score);
+                this.props.onTestComplete();
+                return "";
             }
+            this.wordList.level++;
+            this.wordList.score=0;
             this.wordListManager.setLevelScore(this.props.wordListId,this.wordList.level,this.wordList.score);
             this.setState({activeStep:this.wordList.level});
         }
@@ -127,7 +128,7 @@ const styles = theme => ({
     skipPractice(){
         this.wordList.level=1;
         this.wordListManager.setLevelScore(this.props.wordListId,this.wordList.level,0);
-        this.setState({activeStep:this.wordList.level});
+        this.setState({activeStep:this.wordList.level,word:this.getWord(),mask:this.getMask(this.wordList.level),hint:this.getHint(this.wordList.level)});
     }
 
     render(){

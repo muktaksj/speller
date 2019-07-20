@@ -78,10 +78,10 @@ const styles = theme => ({
                     </Popup>
                     
                     <Button size="small" color="primary" onClick={this.props.onDelete}>Delete</Button>
-                    {this.props.level==4 &&
+                    {this.props.level===4 && this.props.score===this.props.count &&
                       <Button size="small" color="primary" onClick={this.props.onRestart}>Restart</Button>
                     }
-                    {this.props.level < 4 &&
+                    {(this.props.level < 4 || this.props.score<this.props.count) &&
                       <Button size="small" color="primary" onClick={this.props.onLearn}>Learn</Button>
                     }
                 </CardActions>

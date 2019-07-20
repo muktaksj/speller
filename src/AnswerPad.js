@@ -40,9 +40,6 @@ const styles = theme => ({
       wrongAnswerBox:{
         backgroundColor:'red',
         color:'#FFFFFF'
-      },
-      button: {
-        margin: theme.spacing(1),
       }
 });
 
@@ -135,14 +132,12 @@ class AnswerPad extends React.Component {
             </Box>
             }
 
-            {this.props.enableAudio &&
-                <Box className={this.props.classes.answerContainer}>
-                    <Button variant="contained" color="secondary" clasName={this.props.classes.button} onClick={()=>{this.playWord(this.state.word)}}>
-                        Play Word
-                        <PlayCircleOutline></PlayCircleOutline>
-                    </Button> <br/><br/>    
-                </Box>  
-            }
+            <Box className={this.props.classes.answerContainer}>
+                <Button variant="contained" color="secondary" clasName={this.props.classes.button} onClick={()=>{this.playWord(this.state.word)}}>
+                    Play Word
+                    <PlayCircleOutline></PlayCircleOutline>
+                </Button> <br/><br/>    
+            </Box>  
             <Box className={this.props.classes.answerContainer}>
                 {this.getWordPlaceHolders()}
             </Box>

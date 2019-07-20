@@ -13,8 +13,8 @@
         if(!settings){
             settings={
                 rate:0.2,
-                pitch:1,
-                voice:1
+                pitch:2,
+                voice:0
             };
         }
         else{
