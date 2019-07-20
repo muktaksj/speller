@@ -48,7 +48,7 @@ const styles = theme => ({
     getMask(level){
         var word=this.getWord();
         if(level===1){
-            return this.createMissingLettersMask(word,Math.floor(word.length/3));
+            return this.createMissingLettersMask(word, Math.floor(word.length/3));
         }
         else{
             return this.createMissingLettersMask(word,word.length);
@@ -92,9 +92,11 @@ const styles = theme => ({
     }
 
     scrambleLetters(word,numberOfLetters){
+        var iteration=0;
         if(word.length===numberOfLetters){
             var shuffled= word;
-            while(shuffled[0]===word[0] || shuffled[shuffled.length-1]===word[word.length-1]){
+            while(iteration < 5 && (shuffled[0]===word[0] || shuffled[shuffled.length-1]===word[word.length-1])){
+                iteration++;
                 shuffled=this.shuffle(word);
             }
             return shuffled;
@@ -103,16 +105,17 @@ const styles = theme => ({
             var lettersToSkip=Math.floor((word.length-numberOfLetters)/2);
 
             var subWord=word;
-
-            while(subWord===word){
+           
+            while(subWord===word && iteration < 5){
+                iteration++;
                 subWord=word.substring(lettersToSkip,lettersToSkip+numberOfLetters);
                 subWord=this.shuffle(subWord);
                 subWord=word.substring(0,lettersToSkip) + subWord;
                 if(subWord.length < word.length){
                     subWord=subWord+word.substring(subWord.length);
                 }
-                return subWord;
             }
+            return subWord;
         }
     }
 

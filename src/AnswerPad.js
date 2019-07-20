@@ -67,6 +67,7 @@ class AnswerPad extends React.Component {
 
         var state={answer:answer,hint:nextProps.hint,word:nextProps.word};
         if(init){
+            // eslint-disable-next-line
             this.state=state;
         }
         else{
