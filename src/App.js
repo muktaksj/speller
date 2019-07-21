@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import WordList from './WordList';
+import { BreakpointProvider } from 'react-socks';
 
 const styles = theme => ({
   appBar: {
@@ -21,7 +22,7 @@ const styles = theme => ({
 class App extends React.Component {
   render(){
     return (
-      <React.Fragment>
+      <BreakpointProvider>
         <CssBaseline />
         <AppBar position="absolute" color="default" className={this.props.classes.appBar}>
           <Toolbar>
@@ -33,7 +34,7 @@ class App extends React.Component {
         <main className={this.props.classes.layout}>
           <WordList/>
         </main>
-      </React.Fragment>
+      </BreakpointProvider>
 
       );
   }

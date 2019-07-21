@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     createNewPopup:{
-        padding:'20px'
+        padding:'20px',
       },
       textArea:{
         width:'100%'

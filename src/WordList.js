@@ -9,13 +9,16 @@ import WordTest from './WordTest'
 import Popup from "reactjs-popup";
 import WordListManager from './WordListManager';
 import WordListEditor from './WordListEditor';
+import Breakpoint from 'react-socks';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+
 
 const styles = theme => ({
       toolbarButtons: {
         marginLeft: 'auto',
       },
       button: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(1)
       },
       rightIcon: {
         marginLeft: theme.spacing(1),
@@ -30,9 +33,12 @@ const styles = theme => ({
     wordListManager=new WordListManager();
     constructor(props){
       super(props);
-      this.state={wordListId:0,title:"My Word Lists",words:this.wordListManager.getAllLists()};
+      this.state=this.initialState();
     }
 
+    initialState(){
+      return {wordListId:0,title:"My Word Lists",words:this.wordListManager.getAllLists()}
+    }
     
 
     editWordList(id){
@@ -59,21 +65,29 @@ const styles = theme => ({
 
     render(){
         return (
-        <PageContainer title={this.state.title} toolbarButtons={this.state.wordListId===0 &&
+        <PageContainer title={this.state.title} toolbarButtons={
             <div className={this.props.classes.toolbarButtons}>
-              <Popup trigger={
-                <Button variant="contained" color="primary" className={this.props.classes.button}>
-                    Create New
-                    <Add className={this.props.classes.rightIcon}></Add>
+              {this.state.wordListId===0 &&
+                <Popup trigger={
+                  <Button variant="contained" color="primary" className={this.props.classes.button}>
+                      <Breakpoint small up>Create New
+                      </Breakpoint><Add className={this.props.classes.rightIcon}></Add>
+                  </Button>
+                }
+                modal
+                closeOnDocumentClick
+                >
+                  {close=>(
+                    <WordListEditor closeCallback={()=>{this.setState({words:this.wordListManager.getAllLists()}); close();}} />
+                  )}
+                </Popup>
+              }
+              {this.state.wordListId > 0 &&
+                <Button variant="contained" color="primary" className={this.props.classes.button} onClick={()=>{this.setState(this.initialState())}}>
+                  <ArrowBack className={this.props.classes.rightIcon}></ArrowBack><Breakpoint small up>Back
+                  </Breakpoint>
                 </Button>
               }
-              modal
-              closeOnDocumentClick
-              >
-                {close=>(
-                  <WordListEditor closeCallback={()=>{this.setState({words:this.wordListManager.getAllLists()}); close();}} />
-                )}
-              </Popup>
             </div>
         }>
         <div className={this.props.classes.root}>
@@ -81,7 +95,7 @@ const styles = theme => ({
             <Grid container spacing={3} className={this.props.classes.gridRoot}>
                
                 {this.state.words.map((item, key) =>
-                  <Grid key={key}  item xs={3}>
+                  <Grid key={key}  item>
                     <WordListItem id={item.id} title={item.title} score={item.score} level={item.level} count={item.words.length}
                     onDelete={()=>this.deleteWordList(item.id)}
                     onLearn={()=>this.learnWordList(item.id,item.title)}
@@ -94,7 +108,7 @@ const styles = theme => ({
               }
                 
             </Grid>):(
-              <WordTest wordListId={this.state.wordListId} onTestComplete={()=>{this.setState({wordListId:0,words:this.wordListManager.getAllLists()});}}></WordTest>
+              <WordTest wordListId={this.state.wordListId} onTestComplete={()=>{this.setState(this.initialState());}}></WordTest>
             )
           }
         </div>

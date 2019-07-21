@@ -12,22 +12,38 @@ const styles = theme => ({
         margin: theme.spacing(1),
       },
       keypad:{
-          width:'500px',
+          [theme.breakpoints.between('sm','md')]: {
+            width:'100%'
+          },
+          [theme.breakpoints.up('md')]: {
+            width:'500px'
+          },
           display:'flex',
           margin:'0 auto',
-          flexWrap:'wrap'
+          flexWrap:'wrap',
+          justifyContent:'center'
       },
       answerContainer:{
         textAlign:'center'
       },
       answerBox:{
         border:'2px solid skyblue',
-        borderRadius:'10px',
-        width:'60px',
-        height:'60px',
-        marginRight:'3px',
+      
+        [theme.breakpoints.down('sm')]: {
+            borderRadius:'5px',
+            width:'30px',
+            height:'30px',
+            fontSize:'18px'
+        },
+        [theme.breakpoints.up('sm')]: {
+            borderRadius:'10px',
+            width:'60px',
+            height:'60px',
+            fontSize:'40px'
+        },
+        margin:'3px',
         display:'inline-block',
-        fontSize:'40px'
+       
       },
       neutralAnswerBox:{
         backgroundColor:'#FFFFFF',
@@ -134,7 +150,7 @@ class AnswerPad extends React.Component {
             }
 
             <Box className={this.props.classes.answerContainer}>
-                <Button variant="contained" color="secondary" clasName={this.props.classes.button} onClick={()=>{this.playWord(this.state.word)}}>
+                <Button variant="contained" color="secondary" className={this.props.classes.button} onClick={()=>{this.playWord(this.state.word)}}>
                     Play Word
                     <PlayCircleOutline></PlayCircleOutline>
                 </Button> <br/><br/>    

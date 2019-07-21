@@ -7,6 +7,7 @@ import AnswerPad from './AnswerPad';
 import Practice from './Practice';
 import WordListManager from './WordListManager';
 import { Button } from '@material-ui/core';
+import Breakpoint from 'react-socks';
 
 const styles = theme => ({
    
@@ -141,7 +142,12 @@ const styles = theme => ({
                 {this.steps.map((label, index) => {
                     return (
                     <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
+                        <StepLabel>
+                            <Breakpoint small up>
+                                {label}
+                            </Breakpoint>
+                        </StepLabel>
+                        
                     </Step>
                     );
                 })}

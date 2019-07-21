@@ -10,6 +10,14 @@ import Popup from "reactjs-popup";
 import WordListEditor from './WordListEditor';
 
 const styles = theme => ({
+      card:{
+        [theme.breakpoints.down('sm')]: {
+          width:'250px'
+        },
+        [theme.breakpoints.up('sm')]: {
+          width:'350px'
+        }
+      },
       title:{
           fontSize:'1.3em'
       },
@@ -21,13 +29,21 @@ const styles = theme => ({
       },
       primaryBox:{
         flex: '1 0 auto',
+
+        [theme.breakpoints.down('sm')]: {
+          width:'100px'
+        },
+        [theme.breakpoints.up('sm')]: {
+          width:'130px'
+        }
       },
       box:{
         flex: '1 0 auto',
         backgroundColor:"#EAEAEA",
         border:"1px solid #CCCCCC",
         margin:'4px',
-      
+        padding:'3px',
+       
       },
       label:{
         textAlign:'center'
@@ -43,7 +59,7 @@ const styles = theme => ({
     render(){
         return (
           
-            <Card>
+            <Card className={this.props.classes.card}>
                 <CardContent className={this.props.classes.content}>
                     <Box className={this.props.classes.primaryBox}>
                         <Typography className={this.props.classes.title}>{this.props.title}</Typography>
