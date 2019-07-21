@@ -75,7 +75,6 @@ const styles = theme => ({
                   </Button>
                 }
                 modal
-                closeOnDocumentClick
                 >
                   {close=>(
                     <WordListEditor closeCallback={()=>{this.setState({words:this.wordListManager.getAllLists()}); close();}} />

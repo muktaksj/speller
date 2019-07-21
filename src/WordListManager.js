@@ -11,7 +11,7 @@ class WordListManager{
 
     create(title,wordList){
         var list=new MyWordList(title);
-        list.words=wordList.split("\n");
+        list.words=this.filterWordList(wordList);
         var count=localStorage.getItem("Speller_List_Count");
         if(!count){
             count=1;
@@ -25,16 +25,21 @@ class WordListManager{
         return count;
     }
 
-    update(id,title,wordList){
-        var list=this.get(id);
-        list.title=title;
-        list.words=wordList.split("\n").filter(function (el) {   
+    filterWordList(wordList){
+        var words=wordList.split("\n").filter(function (el) {   
             return el !== null && el.trim()!=="";
           });
 
-        for(var x=0;x<list.words.length;x++){
-            list.words[x]=list.words[x].trim();
+        for(var x=0;x<words.length;x++){
+            words[x]=words[x].replace(/[^a-zA-Z'-]*/g,"");
         }
+        return words;
+    }
+
+    update(id,title,wordList){
+        var list=this.get(id);
+        list.title=title;
+        list.words=this.filterWordList(wordList);
 
         list.score=0;
         list.level=0;

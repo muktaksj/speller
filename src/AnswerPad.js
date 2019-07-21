@@ -99,13 +99,19 @@ class AnswerPad extends React.Component {
                 items.push(char);
             }
         }
-        while(items.length<nextProps.word.length * 2 && items.length<26){
+        var finalLength=(nextProps.word.length * 2)-2;
+        while(items.length< finalLength && items.length<26){
             var randomCharCode=String.fromCharCode(Math.floor(Math.random()*(90-65+1)+65));
             if(items.indexOf(randomCharCode)===-1){
                 items.push(randomCharCode);
             }
         }
+       
         items.sort();
+
+        items.push("'");
+        items.push("-");
+
         return items;
     }
     

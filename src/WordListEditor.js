@@ -3,9 +3,9 @@ import { withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import WordListManager from './WordListManager';
 import Button from '@material-ui/core/Button';
+import { TextField } from '@material-ui/core';
 
 
 const styles = theme => ({
@@ -49,16 +49,27 @@ const styles = theme => ({
         return (
             <div className={this.props.classes.createNewPopup}>
             <InputLabel htmlFor="listTitle">Word List Title</InputLabel>
-            <Input id="listTitle" aria-describedby="listTitle-Helper" value={this.state.title} onChange={this.titleChangeHandler} />
+            <Input id="listTitle" error={this.titleError} aria-describedby="listTitle-Helper" value={this.state.title}  fullWidth={true} onChange={this.titleChangeHandler} />
             <FormHelperText id="listTitle-Helper">Title for your List. Ex: My Favorite Word List</FormHelperText>
             <br/>
             <InputLabel htmlFor="words">Words</InputLabel>
             <br/>
-            <TextareaAutosize id="words" aria-describedby="words-Helper" rows="15" className={this.props.classes.textArea} value={this.state.words}  onChange={this.wordsChangeHandler} />
+            <TextField id="words" aria-describedby="words-Helper" error={this.wordsError}  multiline={true} fullWidth={true} rows="8"  className={this.props.classes.textArea} value={this.state.words}  onChange={this.wordsChangeHandler} />
             <FormHelperText id="words-Helper">Enter Words separated by New Line</FormHelperText>
             <Button variant="contained" color="primary" className={this.props.classes.button}
             onClick={()=>{
-              if(this.state.title.trim()==="" || this.state.words.trim()==="") return;
+              if(this.state.title.trim()===""){
+                this.titleError=true;
+                return;
+              }else{
+                this.titleError=false;
+              } 
+              if(this.state.words.trim()===""){
+                this.wordsError=true;
+                return;
+              } else{
+                this.wordsError=false;
+              }
               if(this.props.wordListId){
                 this.wordListManager.update(this.props.wordListId,this.state.title,this.state.words);
               }

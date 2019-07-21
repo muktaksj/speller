@@ -69,10 +69,10 @@ const styles = theme => ({
 
     render(){
         return (
-          <Grid container spacing={3} className={this.props.classes.gridRoot}>
+          <Grid justify="center" container spacing={3} className={this.props.classes.gridRoot}>
                
           {this.props.words.map((item, key) =>
-            <Grid key={key}  item xs={2}>
+            <Grid key={key}  item>
               <Card>
                 <CardContent>
                   <Typography className={this.props.classes.title}>{item}</Typography>

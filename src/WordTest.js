@@ -71,6 +71,7 @@ const styles = theme => ({
 
     createMissingLettersMask(word,numberOfLetters){
         var x=0;
+        if(numberOfLetters===0) numberOfLetters=1;
         if(word.length===numberOfLetters){
             var mask="";
             for(x=0;x<word.length;x++){
@@ -93,6 +94,7 @@ const styles = theme => ({
     }
 
     scrambleLetters(word,numberOfLetters){
+        if(numberOfLetters===0) numberOfLetters=1;
         var iteration=0;
         if(word.length===numberOfLetters){
             var shuffled= word;
