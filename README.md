@@ -1,3 +1,5 @@
+Demo of the Application is available at http://muktak.com/games/speller
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
